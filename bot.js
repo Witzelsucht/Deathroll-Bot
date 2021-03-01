@@ -19,21 +19,10 @@ client.on('ready', () => {
 const prefix = '!deathroll';
 const shortPrefix = '!dr';
 client.on('message', message => {
-    let args = [];
-    if (message.author.bot) return;
-    else if (message.content.startsWith(prefix)) {
-        args = message.content.slice(prefix.length).trim().split(/ +/)
-    }
-    else if (message.content.startsWith(shortPrefix)) {
-        args = message.content.slice(shortPrefix.length).trim().split(/ +/)
-    }
-    else {
-        return
-    }
-    let command = args.shift().toLowerCase();
-    if (args.length === 0) {
-        command = "roll"
-    }
+    if (!(message.content.startsWith(prefix) || message.content.startsWith(shortPrefix)) || message.author.bot) return;
+    const args = message.content.slice(message.content.startsWith(prefix) ? prefix.length : shortPrefix.length).trim().split(/ +/)
+    const command = args.shift().toLowerCase();
+
     if (!client.commands.has(command)) {
         message.channel.send("Couldn't find that command. Type !dr help see all commands");
         return;
