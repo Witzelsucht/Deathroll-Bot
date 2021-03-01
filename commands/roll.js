@@ -15,7 +15,10 @@ module.exports = {
         }
         if (message.author !== state.players[currentPlayer] && state.queueCheck) {
             message.reply("You've rolled out of order, you lose.")
-            cleanUp();
+            state.maxRoll = 10000000;
+            state.started = false;
+            state.queueCheck = false;
+            state.players = [];
             return;
         }
         if (++currentPlayer === state.players.length) {
@@ -26,19 +29,14 @@ module.exports = {
         let roll = Math.floor(Math.random() * (max - min) + min);
         if (roll === 0) {
             message.reply(` 0 - You died.`);
-            cleanUp()
+            state.maxRoll = 10000000;
+            state.started = false;
+            state.queueCheck = false;
+            state.players = [];
         }
         else {
             message.channel.send(roll);
             state.maxRoll = roll;
         }
-    }
-}
-
-function cleanUp() {
-    state = {
-        maxRoll: 10000000,
-        players: [],
-        started: false
     }
 }
