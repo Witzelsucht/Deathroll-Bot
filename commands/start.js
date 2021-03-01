@@ -12,11 +12,13 @@ module.exports = {
             message.channel.send("Nobody signed for a Deathroll game.");
             return;
         }
-        if (Number.isInteger(parseInt(args[1])))
-            state.maxRoll = args[1];
-        if (args.some(a => a.includes("qc")))
+        if (Number.isInteger(parseInt(args[0])))
+            state.maxRoll = args[0];
+        if (args.some(a => a.includes("qc"))) {
             state.queueCheck = true;
+        }
         state.players = shuffle(state.players);
+        state.gameMaster = message.author;
         message.channel.send(`Game starts. Players order: ${state.players}`)
         state.started = true;
     }

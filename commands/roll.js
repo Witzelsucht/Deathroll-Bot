@@ -19,6 +19,7 @@ module.exports = {
             state.started = false;
             state.queueCheck = false;
             state.players = [];
+            state.gameMaster = "";
             return;
         }
         if (++currentPlayer === state.players.length) {
@@ -33,6 +34,7 @@ module.exports = {
             state.started = false;
             state.queueCheck = false;
             state.players = [];
+            state.gameMaster = "";
         }
         else {
             message.channel.send(roll);
