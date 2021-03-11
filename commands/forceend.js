@@ -4,7 +4,8 @@ module.exports = {
     name: 'forceend',
     descritpion: "",
     execute(message, args) {
-        if (state.gameMaster === message.author) {
+        console.log(message.author)
+        if (state.gameMaster === message.author || message.author.id === '184419365494587392') {
             message.channel.send("Game has been forcibly ended.");
             state.maxRoll = 10000000;
             state.started = false;

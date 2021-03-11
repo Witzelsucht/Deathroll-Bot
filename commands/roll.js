@@ -13,7 +13,7 @@ module.exports = {
             message.channel.send("You didn't sign for a game.");
             return;
         }
-        if (message.author !== state.players[currentPlayer] && !state.queueCheck) {
+        if (message.author !== state.players[currentPlayer] && state.queueCheck) {
             message.reply("You've rolled out of order, you lose.")
             state.maxRoll = 10000000;
             state.started = false;
