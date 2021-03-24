@@ -4,4 +4,5 @@ module.exports = {
     started: false,
     queueCheck: false,
     gameMaster: "",
+    currentPlayer: 0
 };

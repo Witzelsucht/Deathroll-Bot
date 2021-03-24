@@ -17,7 +17,11 @@ module.exports = {
         if (args.some(a => a.includes("qc"))) {
             state.queueCheck = true;
         }
+        console.log("DEBUG: Players order before shuffle: \n")
+        console.table(state.players)
         state.players = shuffle(state.players);
+        console.log("DEBUG: Players order after shuffle: \n" );
+        console.table(state.players)
         state.gameMaster = message.author;
         message.channel.send(`Game starts. Players order: ${state.players}`)
         state.started = true;

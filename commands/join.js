@@ -10,6 +10,7 @@ module.exports = {
         }
         if (!state.players.some(p => p === message.author)) {
             state.players.push(message.author)
+            console.log("DEBUG: Player has joined " + message.author.username)
             message.reply(" joined Deathroll");
         }
         else {
