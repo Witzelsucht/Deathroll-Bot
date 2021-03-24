@@ -1,5 +1,4 @@
 let state = require('../gamestate');
-let currentPlayer = 0
 
 module.exports = {
     name: 'roll',
@@ -13,6 +12,9 @@ module.exports = {
             message.channel.send("You didn't sign for a game.");
             return;
         }
+        console.log("DEBUG: Current player: " + state.players[currentPlayer].username)
+        console.log("DEBUG: Players on roll: \n")
+        console.table(state.players)
         if (message.author !== state.players[currentPlayer] && state.queueCheck) {
             message.reply("You've rolled out of order, you lose.")
             state.maxRoll = 10000000;
@@ -20,10 +22,11 @@ module.exports = {
             state.queueCheck = false;
             state.players = [];
             state.gameMaster = "";
+            state.currentPlayer = 0;
             return;
         }
-        if (++currentPlayer === state.players.length) {
-            currentPlayer = 0;
+        if (++state.currentPlayer === state.players.length) {
+            state.currentPlayer = 0;
         }
         min = Math.ceil(0);
         max = Math.floor(state.maxRoll);
@@ -35,6 +38,7 @@ module.exports = {
             state.queueCheck = false;
             state.players = [];
             state.gameMaster = "";
+            state.currentPlayer = 0;
         }
         else {
             message.channel.send(roll);
