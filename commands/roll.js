@@ -12,10 +12,10 @@ module.exports = {
             message.channel.send("You didn't sign for a game.");
             return;
         }
-        console.log("DEBUG: Current player: " + state.players[currentPlayer].username)
+        console.log("DEBUG: Current player: " + state.players[state.currentPlayer].username)
         console.log("DEBUG: Players on roll: \n")
         console.table(state.players)
-        if (message.author !== state.players[currentPlayer] && state.queueCheck) {
+        if (message.author !== state.players[state.currentPlayer] && state.queueCheck) {
             message.reply("You've rolled out of order, you lose.")
             state.maxRoll = 10000000;
             state.started = false;
